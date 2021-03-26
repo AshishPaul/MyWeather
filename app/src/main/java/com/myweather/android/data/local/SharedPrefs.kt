@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Ashish , 2020.
+ * Copyright (c) Ashish , 2021.
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -14,9 +14,13 @@ package com.myweather.android.data.local
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.lang.ref.WeakReference
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class SharedPrefs constructor(private val context: Context) {
+@Singleton
+class SharedPrefs @Inject constructor(@ApplicationContext private val context: Context) {
 
     private fun setString(key: String, value: String) {
         val prefs =

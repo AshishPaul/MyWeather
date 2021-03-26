@@ -10,12 +10,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.myweather.android.data.remote
+package com.myweather.android.data.local.db
 
-import com.myweather.android.data.remote.model.WeatherApiResponse
-import retrofit2.Response
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 
-interface RemoteDataSource {
-    suspend fun getCurrentWeatherData(params: Map<String, String>): Response<WeatherApiResponse>
+const val QUERY_GET_CURRENT_WEATHER_DATA =
+    "SELECT * FROM TABLE_CURRENT_WEATHER_DATA WHERE id = :locationUniqueId"
+
+@Dao
+interface CurrentWeatherDao {
+
+    @Insert
+    suspend fun insert(item: CurrentWeatherData)
+
+    @Query(QUERY_GET_CURRENT_WEATHER_DATA)
+    fun getCurrentWeatherData(locationUniqueId: String): LiveData<CurrentWeatherData>
 }
-

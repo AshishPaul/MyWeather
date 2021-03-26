@@ -10,12 +10,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.myweather.android.data.remote
+package com.myweather.android.data.repository
 
-import com.myweather.android.data.remote.model.WeatherApiResponse
-import retrofit2.Response
+class BaseError(
+    val errorCode: Int = -1,
+    val throwable: Throwable? = null
+) {
 
-interface RemoteDataSource {
-    suspend fun getCurrentWeatherData(params: Map<String, String>): Response<WeatherApiResponse>
 }
-
